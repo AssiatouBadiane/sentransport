@@ -1,23 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './Header';
+import Tableau from './components/Tableau';
 
 function App() {
+  const utilisateurs = [
+    {nom:"Badiane" },{nom:"Diallo" }
+  ]
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <main className="contenu">
+        <p>Bienvenue ! Cette application vous aide à trouver votre ligne de bus à Dakar.</p>
+        <Tableau></Tableau>
+      </main>
     </div>
   );
 }
