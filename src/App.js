@@ -13,23 +13,29 @@ function App() {
   const [recherche, setRecherche] = useState("");
   const [ligneSelectionnee, setLigneSelectionnee] = useState(null);
 
-  useEffect(() => {
-    fetch("http://localhost:5000/lignes")
-      .then(response => {
-        if (!response.ok) {
-          throw new Error("Erreur serveur : " + response.status);
-        }
-        return response.json();
-      })
-      .then(data => {
-        setLignes(data);
-        setChargement(false);
-      })
-      .catch(error => {
-        setErreur(error.message);
-        setChargement(false);
-      });
-  }, []);
+  function chargerLignes() {
+  setChargement(true);
+  setErreur(null);
+  fetch("http://localhost:5000/lignes")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Erreur serveur : " + response.status);
+      }
+      return response.json();
+    })
+    .then(data => {
+      setLignes(data);
+      setChargement(false);
+    })
+    .catch(error => {
+      setErreur(error.message);
+      setChargement(false);
+    });
+}
+
+useEffect(() => {
+  chargerLignes();
+}, []);
 
   const lignesFiltrees = lignes.filter(l =>
     l.depart.toLowerCase().includes(recherche.toLowerCase()) ||
@@ -37,13 +43,15 @@ function App() {
     l.numero.includes(recherche)
   );
 
-  function handleClickLigne(ligne) {
-    if (ligneSelectionnee && ligneSelectionnee.id === ligne.id) {
-      setLigneSelectionnee(null);
-    } else {
-      setLigneSelectionnee(ligne);
-    }
+ function handleClickLigne(ligne) {
+  if (ligneSelectionnee && ligneSelectionnee.id === ligne.id) {
+    setLigneSelectionnee(null);
+  } else {
+    fetch("http://localhost:5000/lignes/" + ligne.id)
+      .then(response => response.json())
+      .then(data => setLigneSelectionnee(data));
   }
+}
 
   if (chargement) {
     return (
@@ -74,6 +82,10 @@ function App() {
   return (
     <div className="App">
       <Header />
+      
+<button onClick={chargerLignes} className="btn-recharger">
+  🔄 Recharger
+</button>
       <main className="contenu">
         <Recherche
           valeur={recherche}

@@ -40,5 +40,19 @@
     "arrivee": "Sandaga",
     "arrets": 11,
     "listeArrets": ["Yoff Village", "Aeroport LSS", "Parcelles U17", "Grand Yoff", "HLM", "Sandaga"]
+  },
+  {
+    "id": 7, "numero": "27",
+    "depart": "Rufisque",
+    "arrivee": "Plateau",
+    "arrets": 20,
+    "listeArrets": ["Rufisque Gare", "Sangalkam", "Keur Massar", "Yeumbeul", "Pikine", "Thiaroye", "Hann", "Plateau"]
+  },
+  {
+    "id": 8, "numero": "36",
+    "depart": "Liberte 6",
+    "arrivee": "Marche Tilene",
+    "arrets": 9,
+    "listeArrets": ["Liberte 6", "Liberte 5", "Liberte 4", "Amitie", "HLM Grand Yoff", "Fass", "Medina", "Marche Tilene"]
   }
 ]
