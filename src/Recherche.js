@@ -1,6 +1,6 @@
 import './Recherche.css';
 
-function Recherche({ valeur, onChange }) {
+function Recherche({ valeur, onChange, onSearch }) {
   return (
     <div className="recherche">
       <input
@@ -9,7 +9,18 @@ function Recherche({ valeur, onChange }) {
         placeholder="Rechercher une ligne (depart, arrivee)..."
         value={valeur}
         onChange={e => onChange(e.target.value)}
+        onKeyDown={e => {
+          if (e.key === 'Enter' && valeur !== "") {
+            onSearch();
+          }
+        }}
       />
+      <button
+        className="recherche-effacer"
+        onClick={() => onChange("")}
+      >
+        Effacer
+      </button>
     </div>
   );
 }
